@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_make"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="일해요!\n홍보물 수정/등록하기"
+        android:bufferType="spannable"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:backgroundTint="@color/lightBlue"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_want"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="원해요!\n관심사 수정/등록하기"
+        android:bufferType="spannable"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:backgroundTint="@color/lightBlue"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_stack"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="찾았어요!\n모인 명함 보기"
+        android:bufferType="spannable"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:backgroundTint="@color/lightYellow"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설정/로그인"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"/>
+
+
+
+
+
+</LinearLayout>
