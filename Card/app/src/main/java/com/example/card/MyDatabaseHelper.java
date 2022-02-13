@@ -15,7 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "my_card";
-    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "card_name";
     private static final String COLUMN_COMPANY = "card_company";
     private static final String COLUMN_FIELD = "card_field";
@@ -26,7 +26,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PRINTER = "card_printer";
 
 
-    public MyDatabaseHelper(@Nullable Context context) {
+    MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -80,4 +80,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    void updateData(String row_id, String name, String company, String field, String phone, String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_COMPANY, company);
+        cv.put(COLUMN_FIELD, field);
+        cv.put(COLUMN_PHONE, phone);
+        cv.put(COLUMN_EMAIL, email);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1){
+            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Updated", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

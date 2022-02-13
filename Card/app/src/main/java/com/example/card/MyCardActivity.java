@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,7 @@ public class MyCardActivity extends AppCompatActivity {
     private MyDatabaseHelper myDB;
     private ArrayList<String> card_id, card_name, card_company, card_field, card_phone, card_email;
     private CustomAdapter customAdapter;
-    private Button btn_add;
+    private Button btn_add, btn_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MyCardActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MyCardActivity.this, card_id, card_name, card_company, card_field, card_phone, card_email);
+        customAdapter = new CustomAdapter(MyCardActivity.this, MyCardActivity.this, card_id, card_name, card_company, card_field, card_phone, card_email);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyCardActivity.this));
 
@@ -52,6 +53,15 @@ public class MyCardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
 
     void storeDataInArrays(){
