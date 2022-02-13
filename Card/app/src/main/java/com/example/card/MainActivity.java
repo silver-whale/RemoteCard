@@ -35,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
         // want, stack, setting
 
-
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

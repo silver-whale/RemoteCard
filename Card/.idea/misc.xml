@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/outline.xml" value="0.2305" />
+        <entry key="app/src/main/res/layout/acitivity_logout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_addinfo.xml" value="0.23550724637681159" />
+        <entry key="app/src/main/res/layout/activity_logout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23550724637681159" />
         <entry key="app/src/main/res/layout/activity_makepopup.xml" value="0.23550724637681159" />
         <entry key="app/src/main/res/layout/activity_mycard.xml" value="0.23550724637681159" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.20681265206812652" />
         <entry key="app/src/main/res/layout/onecard.xml" value="0.23550724637681159" />
       </map>
     </option>
