@@ -168,7 +168,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789" />
+                android:digits="0123456789-"/>
 
         </LinearLayout>
         <LinearLayout
@@ -219,7 +219,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
-                android:inputType="text" />
+                android:inputType="text"/>
 
         </LinearLayout>
         <LinearLayout
@@ -245,7 +245,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789"
+                android:digits="0123456789-"
                 />
 
         </LinearLayout>
@@ -272,7 +272,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789"
+                android:digits="0123456789-"
                 />
 
         </LinearLayout>

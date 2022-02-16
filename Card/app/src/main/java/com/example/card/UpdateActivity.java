@@ -1,7 +1,9 @@
 package com.example.card;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     EditText name_input, company_input, field_input, phone_input;
     EditText email_input, address_input, phone_input2, printer_input;
-    Button update_button, btn_cancel2;
+    Button update_button, btn_delete;
 
     String id, name, company, field, phone, email, address, phone2, printer;
 
@@ -32,7 +34,7 @@ public class UpdateActivity extends AppCompatActivity {
         printer_input = findViewById(R.id.printer_input2);
 
         update_button = findViewById(R.id.update_button);
-        btn_cancel2 = findViewById(R.id.btn_cancel2);
+        btn_delete = findViewById(R.id.btn_delete);
         // First we call this
         getAndSetIntentData();
 
@@ -46,15 +48,18 @@ public class UpdateActivity extends AppCompatActivity {
                 field = field_input.getText().toString().trim();
                 phone = phone_input.getText().toString().trim();
                 email = email_input.getText().toString().trim();
-                myDB.updateData(id, name, company, field, phone, email);
+                address = address_input.getText().toString().trim();
+                phone2 = phone_input2.getText().toString().trim();
+                printer = printer_input.getText().toString().trim();
+                myDB.updateData(id, name, company, field, phone, email, address, phone2, printer);
                 finish();
 
             }
         });
-        btn_cancel2.setOnClickListener(new View.OnClickListener() {
+        btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                confirmDialog();
             }
         });
 
@@ -71,9 +76,9 @@ public class UpdateActivity extends AppCompatActivity {
             field = getIntent().getStringExtra("field");
             phone = getIntent().getStringExtra("phone");
             email = getIntent().getStringExtra("email");
-//            address = getIntent().getStringExtra("address");
-//            phone2 = getIntent().getStringExtra("phone2");
-//            printer = getIntent().getStringExtra("printer");
+            address = getIntent().getStringExtra("address");
+            phone2 = getIntent().getStringExtra("phone2");
+            printer = getIntent().getStringExtra("printer");
 
             //Setting Intent Data
             name_input.setText(name);
@@ -81,13 +86,35 @@ public class UpdateActivity extends AppCompatActivity {
             field_input.setText(field);
             phone_input.setText(phone);
             email_input.setText(email);
-//            address_input.setText(address);
-//            phone_input2.setText(phone2);
-//            printer_input.setText(printer);
+            address_input.setText(address);
+            phone_input2.setText(phone2);
+            printer_input.setText(printer);
 
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("해당 명함을 삭제하시겠습니까?");
+        builder.setMessage("삭제한 명함은 복구할 수 없습니다.");
+        builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
+                myDB.deleteOneRow(id);
+                finish();
+            }
+        });
+
+        builder.create().show();
     }
 
 }

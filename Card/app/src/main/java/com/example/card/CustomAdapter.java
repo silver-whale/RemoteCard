@@ -20,6 +20,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     Activity activity;
     private ArrayList card_id, card_name, card_company, card_field, card_phone, card_email;
+    private ArrayList card_address, card_phone2, card_printer;
 
 
     CustomAdapter(Activity activity, Context context,
@@ -28,7 +29,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                   ArrayList card_company,
                   ArrayList card_field,
                   ArrayList card_phone,
-                  ArrayList card_email){
+                  ArrayList card_email,
+                  ArrayList card_address,
+                  ArrayList card_phone2,
+                  ArrayList card_printer){
         this.activity = activity;
         this.context = context;
         this.card_id = card_id;
@@ -37,6 +41,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.card_field = card_field;
         this.card_phone = card_phone;
         this.card_email = card_email;
+        this.card_address = card_address;
+        this.card_phone2 = card_phone2;
+        this.card_printer = card_printer;
     }
     @NonNull
     @Override
@@ -55,6 +62,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.card_field_txt.setText(String.valueOf(card_field.get(position)));
         holder.card_phone_txt.setText(String.valueOf(card_phone.get(position)));
         holder.card_email_txt.setText(String.valueOf(card_email.get(position)));
+        holder.card_address_txt.setText(String.valueOf(card_address.get(position)));
+        holder.card_phone2_txt.setText(String.valueOf(card_phone2.get(position)));
+        holder.card_printer_txt.setText(String.valueOf(card_printer.get(position)));
+
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +76,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("field", String.valueOf(card_field.get(holder.getAdapterPosition())));
                 intent.putExtra("phone", String.valueOf(card_phone.get(holder.getAdapterPosition())));
                 intent.putExtra("email", String.valueOf(card_email.get(holder.getAdapterPosition())));
+                intent.putExtra("address", String.valueOf(card_address.get(holder.getAdapterPosition())));
+                intent.putExtra("phone2", String.valueOf(card_phone2.get(holder.getAdapterPosition())));
+                intent.putExtra("printer", String.valueOf(card_printer.get(holder.getAdapterPosition())));
                 activity.startActivityForResult(intent, 1);
             }
         });
@@ -77,6 +91,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView card_id_txt, card_name_txt, card_company_txt, card_field_txt, card_phone_txt, card_email_txt;
+        TextView card_address_txt, card_phone2_txt, card_printer_txt;
         RelativeLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -87,6 +102,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             card_field_txt = itemView.findViewById(R.id.card_field_txt);
             card_phone_txt = itemView.findViewById(R.id.card_phone_txt);
             card_email_txt = itemView.findViewById(R.id.card_email_txt);
+            card_address_txt = itemView.findViewById(R.id.card_address_txt);
+            card_phone2_txt = itemView.findViewById(R.id.card_phone2_txt);
+            card_printer_txt = itemView.findViewById(R.id.card_printer_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }

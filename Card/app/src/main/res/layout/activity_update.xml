@@ -168,7 +168,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789" />
+                android:digits="0123456789-"/>
 
         </LinearLayout>
         <LinearLayout
@@ -245,7 +245,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789"
+                android:digits="0123456789-"
                 />
 
         </LinearLayout>
@@ -272,7 +272,7 @@
                 android:layout_marginTop="10dp"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:digits="0123456789"
+                android:digits="0123456789-"
                 />
 
         </LinearLayout>
@@ -293,13 +293,13 @@
                 android:text="업데이트"
                 style="?android:attr/buttonBarButtonStyle" />
             <Button
-                android:id="@+id/btn_cancel2"
+                android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/lightRed"
-                android:text="취소"
+                android:text="삭제"
                 android:textSize="12dp"
                 style="?android:attr/buttonBarButtonStyle" />
 
