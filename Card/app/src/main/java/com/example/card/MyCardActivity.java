@@ -2,12 +2,18 @@ package com.example.card;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +24,7 @@ public class MyCardActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyDatabaseHelper myDB;
     private ArrayList<String> card_id, card_name, card_company, card_field, card_phone, card_email;
+    private ArrayList<String> card_address, card_phone2, card_printer;
     private CustomAdapter customAdapter;
     private Button btn_add;
 
@@ -29,7 +36,6 @@ public class MyCardActivity extends AppCompatActivity {
         btn_add = findViewById(R.id.btn_add);
         recyclerView = findViewById(R.id.recyclerView);
 
-
         myDB = new MyDatabaseHelper(MyCardActivity.this);
         card_id = new ArrayList<>();
         card_name = new ArrayList<>();
@@ -37,13 +43,16 @@ public class MyCardActivity extends AppCompatActivity {
         card_field = new ArrayList<>();
         card_phone = new ArrayList<>();
         card_email = new ArrayList<>();
+        card_address = new ArrayList<>();
+        card_phone2 = new ArrayList<>();
+        card_printer = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MyCardActivity.this, card_id, card_name, card_company, card_field, card_phone, card_email);
+        customAdapter = new CustomAdapter(MyCardActivity.this, MyCardActivity.this, card_id, card_name,
+                card_company, card_field, card_phone, card_email, card_address, card_phone2, card_printer);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyCardActivity.this));
-
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +61,15 @@ public class MyCardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
 
     void storeDataInArrays(){
@@ -59,17 +77,18 @@ public class MyCardActivity extends AppCompatActivity {
         if (cursor.getCount() == 0){
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }else{
-            while(cursor.moveToNext()){
+            while(cursor.moveToNext()) {
                 card_id.add(cursor.getString(0));
                 card_name.add(cursor.getString(1));
                 card_company.add(cursor.getString(2));
                 card_field.add(cursor.getString(3));
                 card_phone.add(cursor.getString(4));
                 card_email.add(cursor.getString(5));
+                card_address.add(cursor.getString(7));
+                card_phone2.add(cursor.getString(6));
+                card_printer.add(cursor.getString(8));
             }
         }
     }
-
-
 
 }

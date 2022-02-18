@@ -76,8 +76,11 @@ public class AddInfoActivity extends AppCompatActivity {
                 myDB.addCard(name_input.getText().toString().trim(),
                         company_input.getText().toString().trim(),
                         field_input.getText().toString().trim(),
-                        Integer.valueOf(phone_input.getText().toString().trim()),
-                        email_input.getText().toString().trim());
+                        phone_input.getText().toString().trim(),
+                        email_input.getText().toString().trim(),
+                        address_input.getText().toString().trim(),
+                        phone_input2.getText().toString().trim(),
+                        printer_input.getText().toString().trim());
                 Intent intent = new Intent(AddInfoActivity.this, MyCardActivity.class);
                 startActivity(intent);
             }

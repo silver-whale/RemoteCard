@@ -15,18 +15,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "my_card";
-    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "card_name";
     private static final String COLUMN_COMPANY = "card_company";
     private static final String COLUMN_FIELD = "card_field";
     private static final String COLUMN_PHONE = "card_phone";
     private static final String COLUMN_EMAIL = "card_email";
-    private static final String COLUMN_PHONE2 = "card_phone2";
     private static final String COLUMN_ADDRESS = "card_address";
+    private static final String COLUMN_PHONE2 = "card_phone2";
     private static final String COLUMN_PRINTER = "card_printer";
 
 
-    public MyDatabaseHelper(@Nullable Context context) {
+    MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -38,11 +38,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_COMPANY + " TEXT, " +
                 COLUMN_FIELD + " TEXT, " +
-                COLUMN_PHONE + " INTEGER, " +
+                COLUMN_PHONE + " TEXT, " +
                 COLUMN_EMAIL + " TEXT, " +
-                COLUMN_PHONE2 + " INTEGER, " +
                 COLUMN_ADDRESS + " TEXT, " +
-                COLUMN_PRINTER + " INTEGER);";
+                COLUMN_PHONE2 + " TEXT, " +
+                COLUMN_PRINTER + " TEXT);";
         db.execSQL(query);
     }
 
@@ -51,7 +51,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    void addCard(String name, String company, String field, int phone, String email){
+    void addCard(String name, String company, String field, String phone, String email,
+                 String address, String phone2, String printer){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -60,6 +61,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_FIELD, field);
         cv.put(COLUMN_PHONE, phone);
         cv.put(COLUMN_EMAIL, email);
+        cv.put(COLUMN_ADDRESS, address);
+        cv.put(COLUMN_PHONE2, phone2);
+        cv.put(COLUMN_PRINTER, printer);
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1){ //fail 시
@@ -80,4 +84,34 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    void updateData(String row_id, String name, String company, String field, String phone, String email,
+                    String address, String phone2, String printer){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_COMPANY, company);
+        cv.put(COLUMN_FIELD, field);
+        cv.put(COLUMN_PHONE, phone);
+        cv.put(COLUMN_EMAIL, email);
+        cv.put(COLUMN_ADDRESS, address);
+        cv.put(COLUMN_PHONE2, phone2);
+        cv.put(COLUMN_PRINTER, printer);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1){
+            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Updated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteOneRow(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+        if (result == -1){
+            Toast.makeText(context, "Fail to Delete.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
