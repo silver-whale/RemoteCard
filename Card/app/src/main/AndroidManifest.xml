@@ -22,7 +22,14 @@
             android:name=".AddInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".MyCardActivity"
+            android:name=".MyCardActivity"/>
+
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false"/>
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
