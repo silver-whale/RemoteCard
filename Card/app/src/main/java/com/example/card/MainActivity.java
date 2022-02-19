@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btn_make.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MyCardActivity.class);
+                Intent intent = new Intent(MainActivity.this, MakePopUpActivity.class);
                 startActivity(intent);
             }
         });
